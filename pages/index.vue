@@ -7,6 +7,22 @@
   </section>
 </template>
 
+<script>
+function getPokemon() {
+  return fetch('https://pokeapi.co/api/v2/pokemon/bulbasaur')
+    .then(response => response.json())
+    .catch(e => {
+      // eslint-disable-next-line no-console
+      console.log(e)
+    })
+}
+
+getPokemon().then(data => {
+  // eslint-disable-next-line no-console
+  console.log(data)
+})
+</script>
+
 <style>
 .container {
   margin: 0 auto;
