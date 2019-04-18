@@ -3,7 +3,11 @@
     <div>
       <h1 class="title">Pokedex</h1>
       <h2 class="subtitle">Pokedex display for PokeAPI</h2>
-      <Pokemon v-for="pokeId in pokemons" :id="pokeId" :key="pokeId" />
+      <Pokemon
+        v-for="pokeId in nbOfPokemonsToDisplay"
+        :id="pokeId"
+        :key="pokeId"
+      />
     </div>
   </section>
 </template>
@@ -17,7 +21,7 @@ export default {
   },
   data() {
     return {
-      pokemons: 15
+      nbOfPokemonsToDisplay: 15
     }
   }
 }
@@ -34,8 +38,7 @@ export default {
 }
 
 .title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Quicksand', Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;

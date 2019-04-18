@@ -1,23 +1,23 @@
 <template>
-  <div class="Pokemon">
-    <h3 class="Name">{{ capitalizeFirstLetter(name) }}</h3>
+  <div class="pokemon">
+    <h3 class="name">{{ name }}</h3>
     <nuxt-link :to="'/pokemon/' + name">
-      <img class="Image" :src="imgPath" :alt="name + ' picture'" />
+      <img class="image" :src="imgPath" :alt="name + ' picture'" />
     </nuxt-link>
     <div v-if="extend">
-      <p class="FirstAbility">First ability: {{ firstAbility }}</p>
-      <p class="Height">Height: {{ height }}</p>
-      <p class="Weight">Weight: {{ weight }} Kg</p>
+      <p class="first-ability">First ability: {{ firstAbility }}</p>
+      <p class="height">Height: {{ height }}</p>
+      <p class="weight">Weight: {{ weight }} Kg</p>
       <p>Type:</p>
       <div v-for="type in types" :key="type">
-        <div class="PokemonType">{{ type }}</div>
+        <div class="pokemon-type">{{ type }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-const fetch = require('node-fetch')
+import * as utils from '../assets/utils'
 
 export default {
   props: {
@@ -32,17 +32,17 @@ export default {
   },
   data: function() {
     return {
-      name: 'Foo',
+      name: '',
       imgPath: '/point_interro.jpg',
-      firstAbility: 'void',
-      weight: '0',
-      height: '0',
-      types: ['void']
+      firstAbility: '',
+      weight: '',
+      height: '',
+      types: ['']
     }
   },
 
   mounted() {
-    this.pokemonAttributs()
+    this.getAndSetPokemonAttributs()
   },
   methods: {
     getPokemon(id) {
@@ -55,35 +55,37 @@ export default {
     },
     setPokemonAttributs(pokemon) {
       this.name = pokemon.name
+
       this.imgPath = pokemon.sprites.front_default
       this.firstAbility = pokemon.abilities[0].ability.name
-      this.weight = this.convertHectogrammsToKilograms(pokemon.weight)
-      this.height = this.convertHeightTostr(pokemon.height)
-      this.types = this.recupTypesFromJson(pokemon.types)
+      this.weight = utils.convertHectogrammsToKilograms(pokemon.weight)
+      this.height = utils.convertHeightTostr(pokemon.height)
+      this.types = this.getPokemonType(pokemon.types)
     },
-    pokemonAttributs() {
-      this.getPokemon(this.id).then(myJson => this.setPokemonAttributs(myJson))
+
+    getAndSetPokemonAttributs() {
+      this.getPokemon(this.id)
+        .then(myJson => this.setPokemonAttributs(myJson))
+        .catch(e => {
+          // eslint-disable-next-line no-console
+          console.log(e)
+        })
     },
-    convertHectogrammsToKilograms(hectogramms) {
-      return Math.round(Math.round(hectogramms * 10) / 10) / 10
-    },
-    convertHeightTostr(height) {
-      return height > 10 ? '' + height / 10 + ' m' : '' + height + ' dm'
-    },
-    recupTypesFromJson(typesJson) {
-      return typesJson
-        .sort((typeTupleA, typeTupleB) => typeTupleA.slot - typeTupleB.slot)
-        .map(typeTuple => this.capitalizeFirstLetter(typeTuple.type.name))
-    },
-    capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1)
+    getPokemonType(typesArray) {
+      return typesArray
+        .sort(
+          (FirstTypeData, SecondTypeData) =>
+            FirstTypeData.slot - SecondTypeData.slot
+        )
+        .map(typeData => typeData.type.name)
     }
   }
 }
 </script>
 
 <style>
-.Pokemon {
+/* class kamel-css */
+.pokemon {
   display: inline-block;
   position: relative;
   /*background-color: #dde0e3; */ /* Light gray */
@@ -91,15 +93,22 @@ export default {
   margin-left: 1%;
   margin-bottom: 1%;
   border: 1px solid #5d6063;
+  /* couelrus et marges dans feuille de list-style-position */
+  /* pas de pourcenage, soit rem unit soit em */
+  /* scss ? */
   border-radius: 5px;
   min-width: 275px;
 }
-.PokemonType {
+.name {
+  text-transform: capitalize;
+}
+.pokemon-type {
   display: inline-block;
   position: relative;
   border: 1px solid #fc2802;
   border-radius: 3px;
   margin-bottom: 1%;
   min-width: 65px;
+  text-transform: capitalize;
 }
 </style>
