@@ -8,11 +8,11 @@ describe('Pokemon', () => {
   })
 })
 
-describe('convertPoundsToKilograms', () => {
+describe('convertHectogrammsToKilograms', () => {
   test('return correct conversion value', () => {
-    expect(Pokemon.methods.convertPoundsToKilograms(50)).toBe(23)
-    expect(Pokemon.methods.convertPoundsToKilograms(60.9874)).toBe(28)
-    expect(Pokemon.methods.convertPoundsToKilograms(0)).toBe(0)
-    expect(Pokemon.methods.convertPoundsToKilograms(-25)).toBe(-11)
+    expect(Pokemon.methods.convertHectogrammsToKilograms(51)).toBe(5.1)
+    expect(Pokemon.methods.convertHectogrammsToKilograms(60.9874)).toBe(6.1)
+    expect(Pokemon.methods.convertHectogrammsToKilograms(0)).toBe(0)
+    expect(Pokemon.methods.convertHectogrammsToKilograms(-25)).toBe(-2.5)
   })
 })

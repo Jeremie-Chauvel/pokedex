@@ -41,14 +41,14 @@ export default {
       this.name = pokemon.name
       this.imgPath = pokemon.sprites.front_default
       this.firstAbility = pokemon.abilities[0].ability.name
-      this.weight = pokemon.weight
+      this.weight = this.convertHectogrammsToKilograms(pokemon.weight)
     },
     pokemonAttributs() {
       this.getPokemon(this.id).then(myJson => this.setPokemonAttributs(myJson))
     },
-    convertPoundsToKilograms(pounds) {
-      return Math.round(pounds * 0.45359)
-    } // 1 pd -> 0.45359kg
+    convertHectogrammsToKilograms(hectogramms) {
+      return Math.round(Math.round(hectogramms * 10) / 10) / 10
+    }
   }
 }
 </script>
