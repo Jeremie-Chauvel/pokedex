@@ -19,17 +19,34 @@
       "vue"
     ],
     "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
-    }
+      "^.+.vue$": "vue-jest",
+      "^.+.js$": "babel-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,vue}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "html",
+      "text-summary"
+    ]
   },
   "dependencies": {
     "cross-env": "^5.2.0",
+    "node-fetch": "^2.3.0",
     "nuxt": "^2.4.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "@nuxtjs/eslint-config": "^0.0.1",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.7.1",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^5.15.1",
     "eslint-config-prettier": "^4.1.0",
     "eslint-config-standard": ">=12.0.0",

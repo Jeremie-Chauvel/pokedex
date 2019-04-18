@@ -8,6 +8,8 @@
 </template>
 
 <script>
+const fetch = require('node-fetch')
+
 export default {
   props: {
     id: {
@@ -43,7 +45,10 @@ export default {
     },
     pokemonAttributs() {
       this.getPokemon(this.id).then(myJson => this.setPokemonAttributs(myJson))
-    }
+    },
+    convertPoundsToKilograms(pounds) {
+      return Math.round(pounds * 0.45359)
+    } // 1 pd -> 0.45359kg
   }
 }
 </script>
