@@ -1,7 +1,9 @@
 <template>
   <div class="Pokemon">
     <h3 class="Name">{{ name }}</h3>
-    <img class="Image" :src="imgPath" :alt="name + ' picture'" />
+    <nuxt-link :to="'/pokemon/' + name">
+      <img class="Image" :src="imgPath" :alt="name + ' picture'" />
+    </nuxt-link>
     <div v-if="extend">
       <p class="FirstAbility">First ability: {{ firstAbility }}</p>
       <p class="Weight">Weight: {{ weight }} Kg</p>
@@ -15,7 +17,7 @@ const fetch = require('node-fetch')
 export default {
   props: {
     id: {
-      type: Number,
+      type: [Number, String],
       default: 1
     },
     extend: {

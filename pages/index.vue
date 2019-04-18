@@ -3,7 +3,6 @@
     <div>
       <h1 class="title">Pokedex</h1>
       <h2 class="subtitle">Pokedex display for PokeAPI</h2>
-
       <Pokemon v-for="pokeId in pokemons" :id="pokeId" :key="pokeId" />
     </div>
   </section>
