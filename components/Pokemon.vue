@@ -2,8 +2,10 @@
   <div class="Pokemon">
     <h3 class="Name">{{ name }}</h3>
     <img class="Image" :src="imgPath" :alt="name + ' picture'" />
-    <p class="FirstAbility">First ability: {{ firstAbility }}</p>
-    <p class="Weight">Weight: {{ weight }} Kg</p>
+    <div v-if="extend">
+      <p class="FirstAbility">First ability: {{ firstAbility }}</p>
+      <p class="Weight">Weight: {{ weight }} Kg</p>
+    </div>
   </div>
 </template>
 
@@ -15,6 +17,10 @@ export default {
     id: {
       type: Number,
       default: 1
+    },
+    extend: {
+      type: Boolean,
+      default: false
     }
   },
   data: function() {
