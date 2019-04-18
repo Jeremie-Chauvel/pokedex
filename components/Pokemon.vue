@@ -64,10 +64,11 @@ export default {
   display: inline-block;
   position: relative;
   /*background-color: #dde0e3; */ /* Light gray */
-  padding: 3%;
+  padding: 1%;
   margin-left: 1%;
   margin-bottom: 1%;
   border: 1px solid #5d6063;
   border-radius: 5px;
+  min-width: 275px;
 }
 </style>
