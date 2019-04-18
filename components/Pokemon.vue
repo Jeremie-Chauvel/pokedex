@@ -6,6 +6,7 @@
     </nuxt-link>
     <div v-if="extend">
       <p class="FirstAbility">First ability: {{ firstAbility }}</p>
+      <p class="Height">Height: {{ height }}</p>
       <p class="Weight">Weight: {{ weight }} Kg</p>
     </div>
   </div>
@@ -30,9 +31,11 @@ export default {
       name: 'Foo',
       imgPath: '/point_interro.jpg',
       firstAbility: 'void',
-      weight: '0'
+      weight: '0',
+      height: '0'
     }
   },
+
   mounted() {
     this.pokemonAttributs()
   },
@@ -50,12 +53,16 @@ export default {
       this.imgPath = pokemon.sprites.front_default
       this.firstAbility = pokemon.abilities[0].ability.name
       this.weight = this.convertHectogrammsToKilograms(pokemon.weight)
+      this.height = this.convertHeightTostr(pokemon.height)
     },
     pokemonAttributs() {
       this.getPokemon(this.id).then(myJson => this.setPokemonAttributs(myJson))
     },
     convertHectogrammsToKilograms(hectogramms) {
       return Math.round(Math.round(hectogramms * 10) / 10) / 10
+    },
+    convertHeightTostr(height) {
+      return height > 10 ? '' + height / 10 + ' m' : '' + height + ' dm'
     }
   }
 }

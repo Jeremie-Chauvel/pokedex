@@ -16,3 +16,11 @@ describe('convertHectogrammsToKilograms', () => {
     expect(Pokemon.methods.convertHectogrammsToKilograms(-25)).toBe(-2.5)
   })
 })
+
+describe('convertHeightTostr', () => {
+  it('Should return correct string for each value', () => {
+    expect(Pokemon.methods.convertHeightTostr(51)).toBe('5.1 m')
+    expect(Pokemon.methods.convertHeightTostr(6)).toBe('6 dm')
+    expect(Pokemon.methods.convertHeightTostr(0)).toBe('0 dm')
+  })
+})
