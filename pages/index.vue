@@ -3,7 +3,8 @@
     <div>
       <h1 class="title">Pokedex</h1>
       <h2 class="subtitle">Pokedex display for PokeAPI</h2>
-      <Pokemon :id="1" />
+
+      <Pokemon v-for="pokeId in pokemons" :id="pokeId" :key="pokeId" />
     </div>
   </section>
 </template>
@@ -14,6 +15,11 @@ import Pokemon from '../components/Pokemon.vue'
 export default {
   components: {
     Pokemon
+  },
+  data() {
+    return {
+      pokemons: 15
+    }
   }
 }
 </script>
