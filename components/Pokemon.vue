@@ -8,6 +8,10 @@
       <p class="FirstAbility">First ability: {{ firstAbility }}</p>
       <p class="Height">Height: {{ height }}</p>
       <p class="Weight">Weight: {{ weight }} Kg</p>
+      <p>Type:</p>
+      <div v-for="type in types" :key="type">
+        <div class="PokemonType">{{ type }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +36,8 @@ export default {
       imgPath: '/point_interro.jpg',
       firstAbility: 'void',
       weight: '0',
-      height: '0'
+      height: '0',
+      types: ['void']
     }
   },
 
@@ -54,6 +59,7 @@ export default {
       this.firstAbility = pokemon.abilities[0].ability.name
       this.weight = this.convertHectogrammsToKilograms(pokemon.weight)
       this.height = this.convertHeightTostr(pokemon.height)
+      this.types = this.recupTypesFromJson(pokemon.types)
     },
     pokemonAttributs() {
       this.getPokemon(this.id).then(myJson => this.setPokemonAttributs(myJson))
@@ -63,6 +69,11 @@ export default {
     },
     convertHeightTostr(height) {
       return height > 10 ? '' + height / 10 + ' m' : '' + height + ' dm'
+    },
+    recupTypesFromJson(typesJson) {
+      return typesJson
+        .sort((typeTupleA, typeTupleB) => typeTupleA.slot - typeTupleB.slot)
+        .map(typeTuple => typeTuple.type.name)
     }
   }
 }
@@ -79,5 +90,13 @@ export default {
   border: 1px solid #5d6063;
   border-radius: 5px;
   min-width: 275px;
+}
+.PokemonType {
+  display: inline-block;
+  position: relative;
+  border: 1px solid #fc2802;
+  border-radius: 3px;
+  margin-bottom: 1%;
+  min-width: 65px;
 }
 </style>

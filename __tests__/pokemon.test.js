@@ -24,3 +24,16 @@ describe('convertHeightTostr', () => {
     expect(Pokemon.methods.convertHeightTostr(0)).toBe('0 dm')
   })
 })
+
+describe('recupTypesFromJson', () => {
+  it('Should return list of types name', () => {
+    const typesJson = [
+      { slot: 2, type: { id: 1, name: 'plante' } },
+      { slot: 1, type: { id: 2, name: 'poison' } }
+    ]
+    expect(Pokemon.methods.recupTypesFromJson(typesJson)).toEqual([
+      'poison',
+      'plante'
+    ])
+  })
+})
