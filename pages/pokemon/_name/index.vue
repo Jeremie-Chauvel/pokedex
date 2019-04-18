@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      pokeId: this.$route.params.name
+      pokeId: this.$route.params.name.toLowerCase()
     }
   }
 }

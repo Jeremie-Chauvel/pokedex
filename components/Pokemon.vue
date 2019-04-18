@@ -1,6 +1,6 @@
 <template>
   <div class="Pokemon">
-    <h3 class="Name">{{ name }}</h3>
+    <h3 class="Name">{{ capitalizeFirstLetter(name) }}</h3>
     <nuxt-link :to="'/pokemon/' + name">
       <img class="Image" :src="imgPath" :alt="name + ' picture'" />
     </nuxt-link>
@@ -73,7 +73,10 @@ export default {
     recupTypesFromJson(typesJson) {
       return typesJson
         .sort((typeTupleA, typeTupleB) => typeTupleA.slot - typeTupleB.slot)
-        .map(typeTuple => typeTuple.type.name)
+        .map(typeTuple => this.capitalizeFirstLetter(typeTuple.type.name))
+    },
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1)
     }
   }
 }
