@@ -1,22 +1,13 @@
 <template>
-  <section class="container">
-    <div>
-      <nuxt-link to="/">
-        <img class="Image" src="/arrow_back.png" alt="return arrow" />
-      </nuxt-link>
-    </div>
-    <div>
-      <Pokemon :id="pokeId" extend />
-    </div>
-  </section>
+  <DetailPokemon :poke-id="pokeIdentifier"></DetailPokemon>
 </template>
 
 <script>
-import Pokemon from '~/components/Pokemon.vue'
+import DetailPokemon from '../../../components/DetailPokemon.vue'
 
 export default {
   components: {
-    Pokemon
+    DetailPokemon
   },
   validate({ params }) {
     // Must be a number
@@ -24,7 +15,7 @@ export default {
   },
   data() {
     return {
-      pokeId: this.$route.params.name.toLowerCase()
+      pokeIdentifier: this.$route.params.name.toLowerCase()
     }
   }
 }
